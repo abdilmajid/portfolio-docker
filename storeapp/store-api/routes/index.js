@@ -14,7 +14,7 @@ const config = {
   // password: process.env.DATABASE_PASSWORD,
 
   host: '192.168.50.154',
-  port: 5432,
+  port: 5433,
   user: "app",
   password: '',
   database: "storeapp",

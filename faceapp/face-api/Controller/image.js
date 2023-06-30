@@ -9,7 +9,7 @@ const app = new Clarifai.App({
 
 const handleApiCall = (req, res) => {
   // console.log(process.env.API_CLARIFAI)
-  console.log("CallingAPI")
+  // console.log(`API key: ${process.env.API_CLARIFAI}`)
   app.models
     // .predict(Clarifai.FACE_DETECT_MODEL, req.body.input)
     .predict(
