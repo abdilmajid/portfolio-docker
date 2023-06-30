@@ -1,0 +1,4 @@
+FROM postgres:14.8-alpine3.18
+
+RUN addgroup app && adduser -G app -S app
+

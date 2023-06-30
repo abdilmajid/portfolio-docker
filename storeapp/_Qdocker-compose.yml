@@ -1,0 +1,48 @@
+versions: "3.8"
+services:
+
+  store-web:
+    build: ./store-web
+    environment:
+      - PORT=4000
+      - REACT_APP_API_CALL=http://localhost:4001
+      - NODE_OPTIONS=--openssl-legacy-provider
+    ports:
+      - '4000:4000'
+    volumes:
+      - ./store-web:/app
+      - /app/node_modules
+
+  store-api:
+    build: ./store-api
+    environment:
+      - PORT=4001
+      # - DATABASE_URL="192.168.50.154"
+      # - DATABASE_USER="app"
+      # - DATABASE_PASSWORD=''
+      # - DATABASE="storeapp"
+    ports:
+      - '4001:4001'
+    volumes:
+      - ./store-api:/app
+      - /app/node_modules
+
+  store-db:
+    privileged: true
+    build: ./store-db
+    restart: always
+    environment:
+      - POSTGRES_USER=app
+      - POSTGRES_DB=storeapp
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - '5432:5432'
+    volumes:
+    # here we create and link persistant postgres database, so if image is deleted the data is not lost
+      - db:/var/lib/postgresql/data
+    # here we create our initial tables
+      - ./store-db/store.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+volumes:
+  db:
+    driver: local

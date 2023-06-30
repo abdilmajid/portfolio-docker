@@ -1,0 +1,10 @@
+{
+  "apps" : [
+    {
+      "name": "abdilmajidibrahim.com",
+      "script"    : "npx",
+      "interpreter": "none",
+      "args": "serve -s build -p 3000"
+    }
+  ]
+}

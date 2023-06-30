@@ -1,0 +1,22 @@
+FROM node:20.3.0-alpine3.18
+
+RUN addgroup app && adduser -G app -S app
+RUN mkdir /app && chown app:app /app
+USER app
+
+WORKDIR /app
+COPY --chown=app:app package*.json .
+RUN npm install
+COPY --chown=app:app . .
+
+# ENV PORT=4001
+# # DATABASE_URL must not contain http:// because issue with knex 
+# ENV DATABASE_URL="192.168.50.154"
+# ENV DATABASE_PORT=5432
+# ENV DATABASE_USER="app"
+# ENV DATABASE_PASSWORD=''
+# ENV DATABASE="storeapp"
+
+EXPOSE 4001
+
+CMD ["npm", "start"]

@@ -1,0 +1,93 @@
+versions: "3.8"
+services:
+
+  # face-web:
+  #   build: ./face-web
+  #   environment:
+  #     # env for api call
+  #     - PORT=3000 
+  #     - REACT_APP_API_CALL=http://192.168.50.154:3001
+  #   ports:
+  #     - '3000:3000'
+  #   volumes:
+  #     - ./face-web:/app
+  #     - /app/node_modules
+
+  # face-api:
+  #   build: ./face-api
+  #   environment:
+  #     # API token for clarifai service
+  #     - PORT=3001
+  #     - DATABASE_URL=http://localhost:5432
+  #     - API_CLARIFAI="5dc3929cc3234e2e8ad6117dd0af96c3"
+  #   ports:
+  #     - '3001:3001'
+  #   volumes:
+  #     - ./face-api:/app
+  #     - /app/node_modules
+
+  face-db:
+    privileged: true
+    build: ./faceapp/face-db
+    # image: postgres:14.8-alpine3.18
+    restart: always
+    environment:
+      - POSTGRES_USER=app
+      - POSTGRES_DB=faceapp
+    #NOTE: should never use below, instead should use POSTGRES_PASSWORD=<some_password>
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - '5432:5432'
+    volumes:
+    # here we create and link persistant postgres database, so if image is deleted the data is not lost
+      - face-db:/var/lib/postgresql/data
+    # here we create our initial 'login' and 'user' tables
+      - ./faceapp/face-db/face.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+  # store-web:
+  #   build: ./storeapp/store-web
+  #   environment:
+  #     - PORT=4000
+  #     - REACT_APP_API_CALL=http://localhost:4001
+  #     - NODE_OPTIONS=--openssl-legacy-provider
+  #   ports:
+  #     - '4000:4000'
+  #   volumes:
+  #     - ./storeapp/store-web:/app
+  #     - /storeapp/app/node_modules
+
+  # store-api:
+  #   build: ./storeapp/store-api
+  #   environment:
+  #     - PORT=4001
+  #     # - DATABASE_URL="192.168.50.154"
+  #     # - DATABASE_USER="app"
+  #     # - DATABASE_PASSWORD=''
+  #     # - DATABASE="storeapp"
+  #   ports:
+  #     - '4001:4001'
+  #   volumes:
+  #     - ./storeapp/store-api:/app
+  #     - /storeapp/app/node_modules
+
+  store-db:
+    privileged: true
+    build: ./storeapp/store-db
+    restart: always
+    environment:
+      - POSTGRES_USER=app
+      - POSTGRES_DB=storeapp
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - '5433:5432'
+    volumes:
+    # here we create and link persistant postgres database, so if image is deleted the data is not lost
+      - store-db:/var/lib/postgresql/data
+    # here we create our initial tables
+      - ./storeapp/store-db/store.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+volumes:
+  store-db:
+    driver: local
+  face-db:
+    driver: local
