@@ -12,7 +12,7 @@ export const ProjectList = [
     name: 'Face Recognition App',
     image: FaceRecApp,
     githublink: "https://github.com/abdilmajid/faceRecognitionAppReact",
-    demolink: "google.com"
+    demolink: "http://localhost:3000"
   },
   {
     id: 2,

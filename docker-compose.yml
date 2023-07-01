@@ -1,6 +1,16 @@
 versions: "3.8"
 services:
 
+  homepage:
+    build: ./personalwebsite
+    environment:
+      - PORT=3002
+    ports:
+      - '3002:3002'
+    volumes:
+      - ./personalwebsite:/app
+      - /app/node_modules
+
   face-web:
     build: ./faceapp/face-web
     environment:
