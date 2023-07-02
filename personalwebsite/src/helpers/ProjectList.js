@@ -19,7 +19,7 @@ export const ProjectList = [
     name: 'Online Store',
     image: ShoppingApp,
     githublink: "https://github.com/abdilmajid/react-OnlineStore",
-    demolink: "google.com"
+    demolink: "http://localhost:4000"
   },
   {
     id: 3,
@@ -33,6 +33,6 @@ export const ProjectList = [
     name: 'Portfolio Site',
     image: PortfolioSite,
     githublink: "https://github.com/abdilmajid/personalwebsite",
-    demolink: "/"
+    demolink: "http://localhost:3002"
   }
 ]
