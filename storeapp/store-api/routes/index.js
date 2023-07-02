@@ -13,7 +13,8 @@ const config = {
   // user: process.env.DATABASE_USER,
   // password: process.env.DATABASE_PASSWORD,
 
-  host: '192.168.50.154',
+  //Need to use ip of HOST machine, issue with using '127.0.0.1' or 'localhost' when running inside contatainer
+  host: '192.168.50.142',
   port: 5433,
   user: "app",
   password: '',
