@@ -4,6 +4,7 @@ services:
   homepage:
     image: homepage:1.0
     build: ./personalwebsite
+    restart: on-failure
     environment:
       - PORT=3002
     ports:
@@ -15,6 +16,7 @@ services:
   face-web:
     image: face-web:1.1
     build: ./faceapp/face-web
+    restart: on-failure
     environment:
       # env for api call
       - PORT=3000 
@@ -28,6 +30,7 @@ services:
   face-api:
     image: face-api:1.1
     build: ./faceapp/face-api
+    restart: on-failure
     environment:
       # API token for clarifai service
       - PORT=3001
@@ -61,6 +64,7 @@ services:
   store-web:
     image: store-web:1.1
     build: ./storeapp/store-web
+    restart: on-failure
     environment:
       - PORT=4000
       - REACT_APP_API_CALL=http://127.0.0.1:4001
@@ -74,6 +78,7 @@ services:
   store-api:
     image: store-api:1.0
     build: ./storeapp/store-api
+    restart: on-failure
     environment:
       - PORT=4001
       # - DATABASE_URL="192.168.50.154"
