@@ -12,14 +12,14 @@ export const ProjectList = [
     name: 'Face Recognition App',
     image: FaceRecApp,
     githublink: "https://github.com/abdilmajid/faceRecognitionAppReact",
-    demolink: "http://localhost:3000"
+    demolink: "http://192.168.50.118:3000"
   },
   {
     id: 2,
     name: 'Online Store',
     image: ShoppingApp,
     githublink: "https://github.com/abdilmajid/react-OnlineStore",
-    demolink: "http://localhost:4000"
+    demolink: "http://192.168.50.118:4000"
   },
   {
     id: 3,
@@ -33,6 +33,6 @@ export const ProjectList = [
     name: 'Portfolio Site',
     image: PortfolioSite,
     githublink: "https://github.com/abdilmajid/personalwebsite",
-    demolink: "http://localhost:3002"
+    demolink: "http://192.168.50.118:3002"
   }
 ]
