@@ -9,9 +9,9 @@ COPY --chown=app:app package*.json .
 RUN npm install
 COPY --chown=app:app . .
 
-# ENV PORT=4000
-# ENV REACT_APP_API_CALL=http://localhost:4001
-# ENV NODE_OPTIONS=--openssl-legacy-provider
+ENV PORT=4000
+ENV REACT_APP_API_CALL=http://192.168.50.118:4001
+ENV NODE_OPTIONS=--openssl-legacy-provider
 
 EXPOSE 4000
 CMD ["npm", "start"]

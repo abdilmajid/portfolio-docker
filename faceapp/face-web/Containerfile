@@ -7,6 +7,9 @@ USER app
 WORKDIR /app
 COPY --chown=app:app package*.json .
 RUN npm install
+
+ENV PORT=3000 
+ENV REACT_APP_API_CALL=http://192.168.50.118:3001
 COPY --chown=app:app . .
 
 

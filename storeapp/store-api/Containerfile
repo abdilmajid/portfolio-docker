@@ -9,14 +9,7 @@ COPY --chown=app:app package*.json .
 RUN npm install
 COPY --chown=app:app . .
 
-# ENV PORT=4001
-# # DATABASE_URL must not contain http:// because issue with knex 
-# ENV DATABASE_URL="192.168.50.154"
-# ENV DATABASE_PORT=5432
-# ENV DATABASE_USER="app"
-# ENV DATABASE_PASSWORD=''
-# ENV DATABASE="storeapp"
-
+ENV PORT=4001
 EXPOSE 4001
 
 CMD ["npm", "start"]

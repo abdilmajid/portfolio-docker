@@ -7,10 +7,10 @@ USER app
 WORKDIR /app
 COPY --chown=app:app package*.json .
 RUN yarn install 
+
+ENV PORT=3002
 COPY --chown=app:app . .
 
 EXPOSE 3002
-# ENV PORT=3002
-
 CMD ["npm","start"]
 
