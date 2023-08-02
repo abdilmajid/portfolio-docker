@@ -14,10 +14,9 @@ function Certs() {
         </a>
       </div>
       <div className="container ">
+        <a href="https://rhtapps.redhat.com/verify?certId=230-110-702">
         <img src={rhcsa_img} alt="RedHat_Badge" className="responsive" />
-        <div className='overlay_title coming_soon'>
-          COMING SOON
-        </div>
+        </a>
       </div>
       <div className="container ">
         <img src={aws_cloud} alt ="AWS_Badge" className="responsive" />
