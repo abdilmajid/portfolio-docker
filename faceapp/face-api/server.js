@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const cors = require('cors');
 const knex = require('knex');
 const dotenv = require('dotenv');
+const path = require('path');
 dotenv.config();
 
 
@@ -39,7 +40,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// app.use(express.static('./public'));
+app.use(express.static(path.join(__dirname, 'build')));
 
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, '..', 'face-web', 'build', 'index.html'));
+});
 
 // app.get('/', (req, res) => { res.send('It Works') })
 app.post('/signin', (req, res) => signin.handleSignIn(req, res, db, bcrypt))

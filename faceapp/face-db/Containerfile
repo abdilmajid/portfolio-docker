@@ -5,3 +5,5 @@ RUN addgroup app && adduser -G app -S app
 ENV POSTGRES_USER=app
 ENV POSTGRES_DB=faceapp
 ENV POSTGRES_HOST_AUTH_METHOD=trust
+
+COPY face.sql /docker-entrypoint-initdb.d/create_tables.sql

@@ -78,7 +78,7 @@ services:
     # here we create and link persistant postgres database, so if image is deleted the data is not lost
       - face-db:/var/lib/postgresql/data:Z
     # here we create our initial 'login' and 'user' tables
-      - ./faceapp/face-db/face.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      # - ./faceapp/face-db/face.sql:/docker-entrypoint-initdb.d/create_tables.sql
 
   store-web:
     image: store-web:1.1
@@ -111,7 +111,7 @@ services:
     # here we create and link persistant postgres database, so if image is deleted the data is not lost
       - store-db:/var/lib/postgresql/data:Z
     # here we create our initial tables
-      - ./storeapp/store-db/store.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      # - ./storeapp/store-db/store.sql:/docker-entrypoint-initdb.d/create_tables.sql
 
 volumes:
   store-db:
