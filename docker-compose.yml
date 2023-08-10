@@ -39,7 +39,7 @@ services:
   homepage:
     image: homepage:1.0
     build: ./personalwebsite
-    restart: on-failure
+    restart: unless-stopped
     ports:
       - '3002:3002'
     volumes:
@@ -49,7 +49,7 @@ services:
   face-web:
     image: face-web:1.1
     build: ./faceapp/face-web
-    restart: on-failure
+    restart: unless-stopped
     ports:
       - '3000:3000'
     volumes:
@@ -59,7 +59,7 @@ services:
   face-api:
     image: face-api:1.1
     build: ./faceapp/face-api
-    restart: on-failure
+    restart: unless-stopped
     ports:
       - '3001:3001'
     volumes:

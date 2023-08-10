@@ -2,6 +2,7 @@
   "name": "react-redux-onlinestore",
   "version": "1.0.0",
   "private": false,
+  "proxy": "http://192.168.50.118:4001",
   "dependencies": {
     "dotenv": "^16.0.3",
     "es6-promise": "^4.2.5",
@@ -47,5 +48,5 @@
   "bugs": {
     "url": "https://github.com/abdilmajid/react-OnlineStore/issues"
   },
-  "homepage": "https://github.com/abdilmajid/react-OnlineStore#readme"
+  "homepage": "."
 }
