@@ -65,7 +65,7 @@ module.exports = {
   product10: {    
     id: 10,
     name: 'Lego Millennium Falcon.jpg',
-    image: '/products/10-lego-millennium-falcon',
+    image: '/products/10-lego-millennium-falcon.jpg',
     description: 'Escape from the Death Star in the iconic GO Star Wars Millennium Falcon!.Featuring Han Solo, Luke Skywalker, Chewbacca, Ben Kenobi, Princess Leia and Darth Vader, can you rewrite history and help Ben Kenobi defeat his evil nemesis from the dark side?',
     price: '44.99',
     },
