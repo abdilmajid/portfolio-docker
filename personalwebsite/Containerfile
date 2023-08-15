@@ -1,16 +1,31 @@
-FROM node:20.3.0-alpine3.18
+# FROM node:20.3.0-alpine3.18
 
-RUN addgroup app && adduser -G app -S app
-RUN mkdir /app && chown app:app /app
-USER app
+# RUN addgroup app && adduser -G app -S app
+# RUN mkdir /app && chown app:app /app
+# USER app
 
+# WORKDIR /app
+# COPY --chown=app:app package*.json .
+# RUN yarn install 
+
+# ENV PORT=3002
+# COPY --chown=app:app . .
+
+# EXPOSE 3002
+# CMD ["npm","start"]
+FROM node:20.3.0-alpine3.18 as build
 WORKDIR /app
-COPY --chown=app:app package*.json .
+
+COPY package.json .
+COPY yarn.lock .
 RUN yarn install 
 
-ENV PORT=3002
-COPY --chown=app:app . .
+COPY . .
+RUN yarn run build
 
+FROM nginx:stable-alpine3.17
+COPY ./nginx/default.conf /etc/nginx/conf.d
+COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 3002
-CMD ["npm","start"]
 
+CMD ["nginx", "-g", "daemon off;"]

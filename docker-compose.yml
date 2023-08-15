@@ -3,7 +3,7 @@ services:
 
   app:
     image: 'docker.io/jc21/nginx-proxy-manager:latest'
-    restart: unless-stopped
+    # restart: unless-stopped
     ports:
       # These ports are in format <host-port>:<container-port>
       - '80:80' # Public HTTP Port
@@ -42,9 +42,9 @@ services:
     restart: unless-stopped
     ports:
       - '3002:3002'
-    volumes:
-      - ./personalwebsite:/app:Z
-      - /app/node_modules
+    # volumes:
+    #   - ./personalwebsite:/app:Z
+    #   - /app/node_modules
 
   face-web:
     image: face-web:1.1
@@ -52,9 +52,9 @@ services:
     restart: unless-stopped
     ports:
       - '3000:3000'
-    volumes:
-      - ./faceapp/face-web:/app:Z
-      - /app/node_modules
+    # volumes:
+    #   - ./faceapp/face-web:/app:Z
+    #   - /app/node_modules
 
   face-api:
     image: face-api:1.1
@@ -62,9 +62,9 @@ services:
     restart: unless-stopped
     ports:
       - '3001:3001'
-    volumes:
-      - ./faceapp/face-api:/app:Z
-      - /app/node_modules
+    # volumes:
+    #   - ./faceapp/face-api:/app:Z
+    #   - /app/node_modules
 
   face-db:
     image: face-db:1.0
@@ -86,9 +86,9 @@ services:
     restart: on-failure
     ports:
       - '4000:4000'
-    volumes:
-      - ./storeapp/store-web:/app:Z
-      - /app/node_modules
+    # volumes:
+    #   - ./storeapp/store-web:/app:Z
+    #   - /app/node_modules
 
   store-api:
     image: store-api:1.0
@@ -96,9 +96,9 @@ services:
     restart: on-failure
     ports:
       - '4001:4001'
-    volumes:
-      - ./storeapp/store-api:/app:Z
-      - /app/node_modules
+    # volumes:
+    #   - ./storeapp/store-api:/app:Z
+    #   - /app/node_modules
 
   store-db:
     image: store-db:1.0

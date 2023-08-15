@@ -11,4 +11,4 @@ ENV POSTGRES_USER=app
 ENV POSTGRES_DB=storeapp
 ENV POSTGRES_HOST_AUTH_METHOD=trust
 
-COPY store.sql /docker-entrypoint-initdb.d
+COPY ./store.sql /docker-entrypoint-initdb.d/create_tables.sql

@@ -9,7 +9,7 @@ COPY --chown=app:app package*.json .
 RUN npm install
 
 ENV PORT=3001
-ENV DATABASE_URL=http://192.168.50.118:5432
+ENV DATABASE_URL=http://192.168.50.56:5432
 ENV API_CLARIFAI=5dc3929cc3234e2e8ad6117dd0af96c3
 
 COPY --chown=app:app . .
