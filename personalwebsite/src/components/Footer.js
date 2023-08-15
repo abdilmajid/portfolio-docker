@@ -12,7 +12,7 @@ function Footer() {
         <a href="https://github.com/abdilmajid"><SiGithub /></a>
         <a href="mailto:abdilwebdev@gmail.com"><MdOutlineEmail /></a>
       </div>     
-      <p> &copy; 2022 AbdilmajidIbrahim.com </p>
+      <p> &copy; 2023 AbdilmajidIbrahim.com </p>
     </div>
   );
 }
