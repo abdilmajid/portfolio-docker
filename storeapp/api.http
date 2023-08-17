@@ -1,0 +1,27 @@
+GET http://localhost:8000/api/products HTTP/1.1
+
+###
+GET http://localhost:8000/products HTTP/1.1
+
+###
+GET http://localhost:4001/api/products HTTP/1.1
+
+###
+GET http://localhost:4001/products HTTP/1.1
+
+###
+GET http://localhost:8000/products HTTP/1.1
+
+###
+GET http://localhost:4001/api/orders/1 HTTP/1.1
+
+
+###
+
+POST https://example.com/comments HTTP/1.1
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}

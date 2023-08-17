@@ -11,6 +11,8 @@ class ProductListing extends Component {
   componentDidMount() {
     const { loadProducts } = this.props
     fetchApi('get', `${apiCall}/products`)
+    // fetchApi('get', "http://localhost:4001/api/products")
+    // fetchApi('get', "http://192.168.50.56:8080/api/products")
       .then((json) => {
         loadProducts(json)
       })

@@ -1,0 +1,37 @@
+# FROM node:20.3.0-alpine3.18
+
+# RUN addgroup app && adduser -G app -S app
+# RUN mkdir /app && chown app:app /app
+# USER app
+
+# WORKDIR /app
+# COPY --chown=app:app package*.json .
+# RUN npm ci --production
+# COPY --chown=app:app . .
+
+# ENV PORT=4000
+# ENV REACT_APP_API_CALL=http://192.168.50.56:4001
+# ENV NODE_OPTIONS=--openssl-legacy-provider
+
+# EXPOSE 4000
+# # RUN npm run build
+
+
+# CMD ["npm", "start"]
+
+FROM node:20.3.0-alpine3.18 as build
+WORKDIR /app
+COPY package*.json .
+RUN npm install
+ENV NODE_OPTIONS=--openssl-legacy-provider
+COPY . .
+RUN npm run build
+
+
+FROM nginx:stable-alpine3.17-slim
+COPY --from=build /app/build /usr/share/nginx/html
+ENV REACT_APP_API_CALL=http://192.168.50.56:4001/api
+EXPOSE 4000
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
+

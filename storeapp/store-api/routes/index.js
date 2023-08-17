@@ -27,8 +27,10 @@ const pool = new Pool(config);
 //creates routes for different requests
 const router = express.Router()
 
+// router.get('/api', (req,res) => res.send("Hello World"));
 
-router.get('/products', (req, res) => {
+
+router.get('/api/products', (req, res) => {
   pool.connect()
     .then(() => {
       const sql = 'SELECT * FROM products;'
@@ -40,7 +42,9 @@ router.get('/products', (req, res) => {
 })
 
 
-router.post('/orders', async (req, res) => {
+
+
+router.post('/api/orders', async (req, res) => {
   const {name, email, order_items} = req.body.orders;
   const sql1 = `INSERT INTO orders(name, email) VALUES ($1, $2) RETURNING id`
   const sql2 = `INSERT INTO order_items(order_id, product_id, qty, products) VALUES ($1, $2, $3, $4)`
@@ -153,7 +157,7 @@ router.post('/orders', async (req, res) => {
 })
 
 
-router.get('/orders/:id', async(req, res) => {
+router.get('/api/orders/:id', async(req, res) => {
   const { id } = req.params
   const sql3 = `SELECT row_to_json(t) FROM ( SELECT id, name, email, ( SELECT json_agg(row_to_json(order_items)) FROM order_items WHERE order_id=orders.id ) AS order_items FROM orders WHERE id = ${id}) t;`
   await pool.connect()

@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+// import axios from 'axios';
 require('es6-promise').polyfill();
 
 export default function fetchApi(method, url, data) {
@@ -15,9 +16,19 @@ export default function fetchApi(method, url, data) {
   }).then(res => res.json())                
 }
 
-
-
-
+// export default function fetchApi(method, url, data) {
+//   const body = method.toLowerCase() === 'get' ? {} : {body: JSON.stringify(data)}
+//   return axios(url, {
+//     method,
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json',
+//       'X-Requested-With': 'XMLHttpRequest'
+//     },
+//     credentials: 'same-origin',
+//     ...body,
+//   }).then(res => res.json())       
+// }
 
 
 

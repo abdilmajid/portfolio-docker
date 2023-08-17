@@ -6,11 +6,11 @@ USER app
 
 WORKDIR /app
 COPY --chown=app:app package*.json .
-RUN npm ci --production
+RUN npm install
 COPY --chown=app:app . .
 
 ENV PORT=4000
-ENV REACT_APP_API_CALL=http://192.168.50.56:4001
+ENV REACT_APP_API_CALL=http://192.168.50.56:8080/api
 ENV NODE_OPTIONS=--openssl-legacy-provider
 
 EXPOSE 4000
