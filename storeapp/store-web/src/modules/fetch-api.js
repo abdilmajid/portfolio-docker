@@ -16,9 +16,10 @@ export default function fetchApi(method, url, data) {
   }).then(res => res.json())                
 }
 
-// export default function fetchApi(method, url, data) {
+// async function fetchApi(method, url, data) {
 //   const body = method.toLowerCase() === 'get' ? {} : {body: JSON.stringify(data)}
-//   return axios(url, {
+
+//   const response = await fetch(url, {
 //     method,
 //     headers: {
 //       'Accept': 'application/json',
@@ -27,9 +28,12 @@ export default function fetchApi(method, url, data) {
 //     },
 //     credentials: 'same-origin',
 //     ...body,
-//   }).then(res => res.json())       
+//   })
+
+//   const prod = await response.json();
+//   // .then(res => res.json())  
+//   return prod;
 // }
 
 
-
-
+// export default fetchApi;

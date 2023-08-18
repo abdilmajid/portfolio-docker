@@ -4,19 +4,19 @@ services:
   store-web:
     build: ./store-web
     container_name: store-web
-    restart: unless-stopped
+    # restart: unless-stopped
     ports:
       - '4000:4000'
     volumes:
       - ./store-web:/app:Z
       - /app/node_modules
     networks: 
-      - node-network
+      - store-network
 
   store-api:
     build: ./store-api
     container_name: store-api
-    restart: unless-stopped
+    # restart: unless-stopped
     ports:
       - '4001:4001'
     volumes:
@@ -25,17 +25,16 @@ services:
     depends_on:
       - store-db
     networks: 
-      - node-network
+      - store-network
 
   store-db:
-    # privileged: true
     build: ./store-db
     container_name: store-db
     restart: unless-stopped
     ports:
       - '5433:5432'
     networks: 
-      - node-network
+      - store-network
     volumes:
     # here we create and link persistant postgres database, so if image is deleted the data is not lost
       - db:/var/lib/postgresql/data:Z
@@ -45,19 +44,21 @@ services:
   nginx:
     build: ./nginx
     container_name: nginx
-    restart: unless-stopped
+    # restart: unless-stopped
     ports:
       - '8080:80'
     depends_on:
       - store-web
       - store-api
     networks: 
-      - node-network
+      - store-network
 
 volumes:
   db:
     driver: local
 
 networks: 
-  node-network:
+  store-network:
     driver: bridge
+  # face-network:
+  #   driver: bridge

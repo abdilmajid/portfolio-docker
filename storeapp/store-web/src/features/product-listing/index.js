@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import fetchApi from '../../modules/fetch-api';
 
 const apiCall = process.env.REACT_APP_API_CALL
+// const apiCall = 'http://store.abdil.ca/api'
+
+
 
 class ProductListing extends Component {
   //when component mounts it will do an async request to api
@@ -12,7 +15,7 @@ class ProductListing extends Component {
     const { loadProducts } = this.props
     fetchApi('get', `${apiCall}/products`)
     // fetchApi('get', "http://localhost:4001/api/products")
-    // fetchApi('get', "http://192.168.50.56:8080/api/products")
+    // fetchApi('get', "http://store-api.abdil.ca/api/products")
       .then((json) => {
         loadProducts(json)
       })

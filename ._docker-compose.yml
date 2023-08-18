@@ -1,0 +1,161 @@
+versions: "3.8"
+services:
+
+  app:
+    image: 'docker.io/jc21/nginx-proxy-manager:latest'
+    # restart: unless-stopped
+    container_name: app
+    ports:
+      # These ports are in format <host-port>:<container-port>
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      - '81:81' # Admin Web Port
+      # Add any other Stream port you want to expose
+      # - '21:21' # FTP
+    environment:
+      # Mysql/Maria connection parameters:
+      DB_MYSQL_HOST: "db"
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: "app"
+      DB_MYSQL_PASSWORD: "app"
+      DB_MYSQL_NAME: "app"
+      # Uncomment this if IPv6 is not enabled on your host
+      # DISABLE_IPV6: 'true'
+    networks: 
+      - store-network
+      # - face-network
+    volumes:
+      - ./npm/data:/data:Z
+      - ./npm/letsencrypt:/etc/letsencrypt:Z
+
+  db:
+    image: 'docker.io/jc21/mariadb-aria:latest'
+    restart: unless-stopped
+    container_name: db
+    privileged: true
+    environment:
+      MYSQL_ROOT_PASSWORD: 'app'
+      MYSQL_DATABASE: 'app'
+      MYSQL_USER: 'app'
+      MYSQL_PASSWORD: 'app'
+    networks: 
+      - store-network
+      # - face-network
+    volumes:
+      - ./npm/mysql:/var/lib/mysql:Z
+
+  homepage:
+    build: ./personalwebsite
+    container_name: homepage
+    restart: unless-stopped
+    ports:
+      - '3002:3002'
+    networks: 
+      - store-network
+      # - face-network
+    # volumes:
+    #   - ./personalwebsite:/app:Z
+    #   - /app/node_modules
+
+  # face-web:
+  #   image: face-web:1.1
+  #   build: ./faceapp/face-web
+  #   container_name: face-web
+  #   restart: unless-stopped
+  #   ports:
+  #     - '3000:3000'
+  #   networks: 
+  #     - face-network
+  #   # volumes:
+  #   #   - ./faceapp/face-web:/app:Z
+  #   #   - /app/node_modules
+
+  # face-api:
+  #   image: face-api:1.1
+  #   build: ./faceapp/face-api
+  #   container_name: face-api
+  #   restart: unless-stopped
+  #   ports:
+  #     - '3001:3001'
+  #   networks: 
+  #     - face-network
+  #   # volumes:
+  #   #   - ./faceapp/face-api:/app:Z
+  #   #   - /app/node_modules
+
+  # face-db:
+  #   image: face-db:1.0
+  #   build: ./faceapp/face-db
+  #   container_name: face-db
+  #   # image: postgres:14.8-alpine3.18
+  #   # restart: always
+  #   ports:
+  #     - '5432:5432'
+  #   networks: 
+  #     - face-network
+  #   volumes:
+  #   # here we create and link persistant postgres database, so if image is deleted the data is not lost
+  #     - face-db:/var/lib/postgresql/data:Z
+  #   # here we create our initial 'login' and 'user' tables
+  #     # - ./faceapp/face-db/face.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+  store-web:
+    build: ./storeapp/store-web
+    container_name: store-web
+    tty: true
+    stdin_open: true
+    # restart: unless-stopped
+    ports:
+      - '4000:4000'
+    # volumes:
+    #   - ./storeapp/store-web:/app:Z
+    #   - /app/node_modules
+    networks: 
+      - store-network
+
+
+  store-api:
+    build: ./storeapp/store-api
+    container_name: store-api
+    tty: true
+    # restart: unless-stopped
+    ports:
+      - '4001:4001'
+    volumes:
+      - ./storeapp/store-api:/app:Z
+      - /app/node_modules
+    depends_on:
+      - store-db
+    networks: 
+      - store-network
+
+
+
+  store-db:
+    build: ./storeapp/store-db
+    container_name: store-db
+    tty: true
+    # restart: unless-stopped
+    ports:
+      - '5433:5432'
+    networks: 
+      - store-network
+    volumes:
+    # here we create and link persistant postgres database, so if image is deleted the data is not lost
+      - store-db:/var/lib/postgresql/data:Z
+    # here we create our initial tables
+      # - ./storeapp/store-db/store.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+
+volumes:
+  store-db:
+    driver: local
+  # face-db:
+  #   driver: local
+
+
+networks: 
+  store-network:
+    driver: bridge
+  # face-network:
+  #   driver: bridge
