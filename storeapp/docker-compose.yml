@@ -4,6 +4,7 @@ services:
   store-web:
     build: ./store-web
     container_name: store-web
+    tty: true
     # restart: unless-stopped
     ports:
       - '4000:4000'

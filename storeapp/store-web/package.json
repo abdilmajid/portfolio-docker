@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "private": false,
   "dependencies": {
-    "axios": "^1.4.0",
-    "dotenv": "^16.0.3",
     "es6-promise": "^4.2.5",
     "formik": "^1.4.1",
     "isomorphic-fetch": "^3.0.0",
@@ -20,6 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "server": "serve -s -n -p 4000 build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -44,5 +43,5 @@
   "bugs": {
     "url": "https://github.com/abdilmajid/react-OnlineStore/issues"
   },
-  "homepage": "."
+  "homepage": ""
 }

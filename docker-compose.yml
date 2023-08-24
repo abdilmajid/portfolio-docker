@@ -20,9 +20,9 @@ services:
     # restart: unless-stopped
     ports:
       - '4000:4000'
-    volumes:
-      - ./storeapp/store-web:/app:Z
-      - /app/node_modules
+    # volumes:
+    #   - ./storeapp/store-web:/app:Z
+    #   - /app/node_modules
     networks: 
       - store-network
 
@@ -32,9 +32,9 @@ services:
     # restart: unless-stopped
     ports:
       - '4001:4001'
-    volumes:
-      - ./storeapp/store-api:/app:Z
-      - /app/node_modules
+    # volumes:
+    #   - ./storeapp/store-api:/app:Z
+    #   - /app/node_modules
     depends_on:
       - store-db
     networks: 
