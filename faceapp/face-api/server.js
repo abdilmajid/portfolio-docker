@@ -40,18 +40,18 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // app.use(express.static('./public'));
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, '..', 'face-web', 'build', 'index.html'));
-});
+// app.get('/', function (req, res) {
+//   res.sendFile(path.join(__dirname, '..', 'face-web', 'build', 'index.html'));
+// });
 
-// app.get('/', (req, res) => { res.send('It Works') })
-app.post('/signin', (req, res) => signin.handleSignIn(req, res, db, bcrypt))
-app.post('/register', (req, res) => register.handleRegister(req, res, db, bcrypt));
-app.get('/profile/:id', (req, res) => profile.handleProfile(req, res, db));
-app.put('/image', (req, res) => image.handleImage(req, res, db));
-app.post('/imageurl', (req, res) => { image.handleApiCall(req, res)})
+app.get('/api', (req, res) => { res.send('It Works') })
+app.post('/api/signin', (req, res) => signin.handleSignIn(req, res, db, bcrypt))
+app.post('/api/register', (req, res) => register.handleRegister(req, res, db, bcrypt));
+app.get('/api/profile/:id', (req, res) => profile.handleProfile(req, res, db));
+app.put('/api/image', (req, res) => image.handleImage(req, res, db));
+app.post('/api/imageurl', (req, res) => { image.handleApiCall(req, res)})
 
 
 app.listen(process.env.PORT || 3001, ()=> {

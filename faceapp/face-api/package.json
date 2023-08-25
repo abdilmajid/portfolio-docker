@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/abdilmajid/faceRecognitionApi/issues"
   },
-  "homepage": ".",
+  "homepage": "",
   "description": "",
   "devDependencies": {
     "nodemon": "^2.0.21"

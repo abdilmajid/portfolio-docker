@@ -8,52 +8,94 @@ services:
     ports:
       - '3002:3002'
     networks: 
-      - store-network
-      # - face-network
+      - home-network
     # volumes:
     #   - ./personalwebsite:/app:Z
     #   - /app/node_modules
     
-  store-web:
-    build: ./storeapp/store-web
-    container_name: store-web
-    # restart: unless-stopped
-    ports:
-      - '4000:4000'
-    # volumes:
-    #   - ./storeapp/store-web:/app:Z
-    #   - /app/node_modules
-    networks: 
-      - store-network
+  # store-web:
+  #   build: ./storeapp/store-web
+  #   container_name: store-web
+  #   # restart: unless-stopped
+  #   ports:
+  #     - '4000:4000'
+  #   # volumes:
+  #   #   - ./storeapp/store-web:/app:Z
+  #   #   - /app/node_modules
+  #   networks: 
+  #     - store-network
 
-  store-api:
-    build: ./storeapp/store-api
-    container_name: store-api
+  # store-api:
+  #   build: ./storeapp/store-api
+  #   container_name: store-api
+  #   # restart: unless-stopped
+  #   ports:
+  #     - '4001:4001'
+  #   # volumes:
+  #   #   - ./storeapp/store-api:/app:Z
+  #   #   - /app/node_modules
+  #   depends_on:
+  #     - store-db
+  #   networks: 
+  #     - store-network
+
+  # store-db:
+  #   build: ./storeapp/store-db
+  #   container_name: store-db
+  #   restart: unless-stopped
+  #   ports:
+  #     - '5433:5432'
+  #   networks: 
+  #     - store-network
+  #   volumes:
+  #   # here we create and link persistant postgres database, so if image is deleted the data is not lost
+  #     - storedb:/var/lib/postgresql/data:Z
+  #   # here we create our initial tables
+  #     # - ./store-db/store.sql:/docker-entrypoint-initdb.d/create_tables.sql
+  
+  face-web:
+    build: ./faceapp/face-web
+    container_name: face-web
     # restart: unless-stopped
     ports:
-      - '4001:4001'
-    # volumes:
-    #   - ./storeapp/store-api:/app:Z
-    #   - /app/node_modules
+      - '3000:3000'
     depends_on:
-      - store-db
+      - face-api
     networks: 
-      - store-network
+      - face-network
+    # volumes:
+    #   - ./faceapp/face-web:/app:Z
+    #   - /app/node_modules
 
-  store-db:
-    build: ./storeapp/store-db
-    container_name: store-db
-    restart: unless-stopped
+  face-api:
+    build: ./faceapp/face-api
+    # restart: unless-stopped
+    container_name: face-api
     ports:
-      - '5433:5432'
+      - '3001:3001'
     networks: 
-      - store-network
+      - face-network
+    depends_on:
+      - face-db
+    volumes:
+      - ./faceapp/face-api:/app:Z
+      - /app/node_modules
+
+  face-db:
+    # privileged: true
+    build: ./faceapp/face-db
+    container_name: face-db
+    # restart: unless-stopped
+    ports:
+      - '5432:5432'
+    networks: 
+      - face-network
     volumes:
     # here we create and link persistant postgres database, so if image is deleted the data is not lost
-      - db:/var/lib/postgresql/data:Z
-    # here we create our initial tables
-      # - ./store-db/store.sql:/docker-entrypoint-initdb.d/create_tables.sql
-    
+      - facedb:/var/lib/postgresql/data:Z
+    # here we create our initial 'login' and 'user' tables
+      # - ./faceapp/face-db/face.sql:/docker-entrypoint-initdb.d/create_tables.sql
+   
   nginx:
     build: ./nginx
     container_name: nginx
@@ -61,17 +103,26 @@ services:
     ports:
       - '80:80'
     depends_on:
-      - store-web
-      - store-api
+      - homepage
+      # - store-web
+      # - store-api
+      - face-web
+      - face-api
     networks: 
-      - store-network
+      - home-network
+      # - store-network
+      - face-network
 
 volumes:
-  db:
+  facedb:
     driver: local
+  # storedb:
+  #   driver: local
 
 networks: 
-  store-network:
+  face-network:
     driver: bridge
-  # face-network:
+  home-network:
+    driver: bridge
+  # store-network:
   #   driver: bridge

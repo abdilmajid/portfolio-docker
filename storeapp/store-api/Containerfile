@@ -5,7 +5,7 @@ RUN mkdir /app && chown app:app /app
 USER app
 
 WORKDIR /app
-COPY --chown=app:app package*.json .
+COPY --chown=app:app package.json .
 COPY --chown=app:app yarn.lock .
 RUN yarn install
 
