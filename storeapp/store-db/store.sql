@@ -45,7 +45,7 @@ VALUES
 
     ('Lego Police', '/products/9-lego-police.jpg', 'Motor to the action and help keep LEGO City safe! Sitting in the control center, the detective alerts the police officer that the robber is escaping in a sports car with a bar of gold.', '39.99'),
 
-    ('Lego Millennium Falcon.jpg', '/products/10-lego-millennium-falcon', 'Escape from the Death Star in the iconic GO Star Wars Millennium Falcon!.Featuring Han Solo, Luke Skywalker, Chewbacca, Ben Kenobi, Princess Leia and Darth Vader, can you rewrite history and help Ben Kenobi defeat his evil nemesis from the dark side?', '44.99'),
+    ('Lego Millennium Falcon', '/products/10-lego-millennium-falcon.jpg', 'Escape from the Death Star in the iconic GO Star Wars Millennium Falcon!.Featuring Han Solo, Luke Skywalker, Chewbacca, Ben Kenobi, Princess Leia and Darth Vader, can you rewrite history and help Ben Kenobi defeat his evil nemesis from the dark side?', '44.99'),
 
     ('Electric Guitar', '/products/11-electric-guitar.jpg', 'Give your little rock star a dream start with this super cool electric guitar especially designed for young musicians. Built to the highest standards this instrument is perfectly suited to a child really wanting to learn how to play.', '64.99'), 
 

@@ -32,7 +32,6 @@ COPY --chown=app:app . .
 
 ENV PORT=3000
 ENV REACT_APP_API_CALL=http://face.abdil.ca/api
-# ENV NODE_OPTIONS=--openssl-legacy-provider
 
 EXPOSE 3000
 RUN yarn run build
