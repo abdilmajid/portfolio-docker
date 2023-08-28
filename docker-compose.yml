@@ -13,7 +13,7 @@ services:
   store-web:
     build: ./storeapp/store-web
     container_name: store-web
-    # restart: unless-stopped
+    restart: unless-stopped
     ports:
       - '4000:4000'
     networks: 
@@ -22,7 +22,7 @@ services:
   store-api:
     build: ./storeapp/store-api
     container_name: store-api
-    # restart: unless-stopped
+    restart: unless-stopped
     ports:
       - '4001:4001'
     depends_on:
@@ -33,7 +33,7 @@ services:
   store-db:
     build: ./storeapp/store-db
     container_name: store-db
-    # restart: unless-stopped
+    restart: unless-stopped
     ports:
       - '5433:5432'
     networks: 
@@ -42,70 +42,68 @@ services:
       - storedb:/var/lib/postgresql/data:Z
 
   
-  # face-web:
-  #   build: ./faceapp/face-web
-  #   container_name: face-web
-  #   restart: unless-stopped
-  #   ports:
-  #     - '3000:3000'
-  #   depends_on:
-  #     - face-api
-  #   networks: 
-  #     - face-network
+  face-web:
+    build: ./faceapp/face-web
+    container_name: face-web
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    depends_on:
+      - face-api
+    networks: 
+      - face-network
 
 
-  # face-api:
-  #   build: ./faceapp/face-api
-  #   restart: unless-stopped
-  #   container_name: face-api
-  #   ports:
-  #     - '3001:3001'
-  #   networks: 
-  #     - face-network
-  #   depends_on:
-  #     - face-db
-  #   # volumes:
-  #   #   - ./faceapp/face-api:/app:Z
-  #   #   - /app/node_modules
+  face-api:
+    build: ./faceapp/face-api
+    restart: unless-stopped
+    container_name: face-api
+    ports:
+      - '3001:3001'
+    networks: 
+      - face-network
+    depends_on:
+      - face-db
 
-  # face-db:
-  #   build: ./faceapp/face-db
-  #   container_name: face-db
-  #   restart: unless-stopped
-  #   ports:
-  #     - '5432:5432'
-  #   networks: 
-  #     - face-network
-  #   volumes:
-  #     - facedb:/var/lib/postgresql/data:Z
+
+  face-db:
+    build: ./faceapp/face-db
+    container_name: face-db
+    restart: unless-stopped
+    ports:
+      - '5432:5432'
+    networks: 
+      - face-network
+    volumes:
+      - facedb:/var/lib/postgresql/data:Z
 
    
   nginx:
     build: ./nginx
     container_name: nginx
-    # restart: unless-stopped
+    restart: unless-stopped
     ports:
       - '80:80'
     depends_on:
       - homepage
       - store-web
       - store-api
-      # - face-web
-      # - face-api
+      - face-web
+      - face-api
     networks: 
       - home-network
       - store-network
-      # - face-network
+      - face-network
 
 volumes:
   storedb:
     driver: local
-  # facedb:
-  #   driver: local
+  facedb:
+    driver: local
 
 networks: 
-  # face-network:
-  #   driver: bridge
+  face-network:
+    driver: bridge
   home-network:
     driver: bridge
   store-network:
