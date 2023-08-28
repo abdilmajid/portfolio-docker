@@ -39,6 +39,7 @@ router.get('/api/products', (req, res) => {
     .then(data => {
       res.send(data.rows)
     })
+    // .catch(err => res.status(400).json("Error getting product images"))
 })
 
 

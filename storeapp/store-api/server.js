@@ -1,9 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors')
-const dotenv = require('dotenv');
-const path = require('path');
-dotenv.config()
+// const dotenv = require('dotenv');
+// dotenv.config()
 
 
 const app = express()
@@ -24,7 +23,6 @@ app.use(cors());
 // app.get('/', function (req, res) {
 //   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 // });
-
 
 //importing routes from different file
 const router = require('./routes')
