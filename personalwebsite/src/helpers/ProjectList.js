@@ -12,14 +12,14 @@ export const ProjectList = [
     name: 'Face Recognition App',
     image: FaceRecApp,
     githublink: "https://github.com/abdilmajid/faceRecognitionAppReact",
-    demolink: "http://faceapp.abdil.ca"
+    demolink: "http://face.abdil.ca"
   },
   {
     id: 2,
     name: 'Online Store',
     image: ShoppingApp,
     githublink: "https://github.com/abdilmajid/react-OnlineStore",
-    demolink: "http://storeapp.abdil.ca"
+    demolink: "http://store.abdil.ca"
   },
   {
     id: 3,

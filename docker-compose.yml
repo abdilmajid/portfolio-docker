@@ -81,7 +81,7 @@ services:
   nginx:
     build: ./nginx
     container_name: nginx
-    restart: unless-stopped
+    # restart: unless-stopped
     ports:
       - '80:80'
     depends_on:
