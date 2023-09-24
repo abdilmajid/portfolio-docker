@@ -1,110 +1,119 @@
-versions: "3.8"
+version: "3.8"
 services:
 
   homepage:
     build: ./personalwebsite
     container_name: homepage
-    restart: unless-stopped
+    # restart: unless-stopped
     ports:
       - '3002:3002'
     networks: 
       - home-network
 
-  store-web:
-    build: ./storeapp/store-web
-    container_name: store-web
-    restart: unless-stopped
-    ports:
-      - '4000:4000'
-    networks: 
-      - store-network
+  # store-web:
+  #   build: ./storeapp/store-web
+  #   container_name: store-web
+  #   # restart: unless-stopped
+  #   ports:
+  #     - '4000:4000'
+  #   networks: 
+  #     - store-network
 
-  store-api:
-    build: ./storeapp/store-api
-    container_name: store-api
-    restart: unless-stopped
-    ports:
-      - '4001:4001'
-    depends_on:
-      - store-db
-    networks: 
-      - store-network
+  # store-api:
+  #   build: ./storeapp/store-api
+  #   container_name: store-api
+  #   restart: unless-stopped
+  #   ports:
+  #     - '4001:4001'
+  #   depends_on:
+  #     - store-db
+  #   networks: 
+  #     - store-network
 
-  store-db:
-    build: ./storeapp/store-db
-    container_name: store-db
-    restart: unless-stopped
-    ports:
-      - '5433:5432'
-    networks: 
-      - store-network
-    volumes:
-      - storedb:/var/lib/postgresql/data:Z
+  # store-db:
+  #   build: ./storeapp/store-db
+  #   container_name: store-db
+  #   # restart: unless-stopped
+  #   ports:
+  #     - '5433:5432'
+  #   networks: 
+  #     - store-network
+  #   volumes:
+  #     - storedb:/var/lib/postgresql/data:Z
 
   
-  face-web:
-    build: ./faceapp/face-web
-    container_name: face-web
-    restart: unless-stopped
-    ports:
-      - '3000:3000'
-    depends_on:
-      - face-api
-    networks: 
-      - face-network
+  # face-web:
+  #   build: ./faceapp/face-web
+  #   container_name: face-web
+  #   # restart: unless-stopped
+  #   ports:
+  #     - '3000:3000'
+  #   depends_on:
+  #     - face-api
+  #   networks: 
+  #     - face-network
 
 
-  face-api:
-    build: ./faceapp/face-api
-    restart: unless-stopped
-    container_name: face-api
-    ports:
-      - '3001:3001'
-    networks: 
-      - face-network
-    depends_on:
-      - face-db
+  # face-api:
+  #   build: ./faceapp/face-api
+  #   # restart: unless-stopped
+  #   container_name: face-api
+  #   ports:
+  #     - '3001:3001'
+  #   networks: 
+  #     - face-network
+  #   depends_on:
+  #     - face-db
 
 
-  face-db:
-    build: ./faceapp/face-db
-    container_name: face-db
-    restart: unless-stopped
-    ports:
-      - '5432:5432'
-    networks: 
-      - face-network
-    volumes:
-      - facedb:/var/lib/postgresql/data:Z
+  # face-db:
+  #   build: ./faceapp/face-db
+  #   container_name: face-db
+  #   # restart: unless-stopped
+  #   ports:
+  #     - '5432:5432'
+  #   networks: 
+  #     - face-network
+  #   volumes:
+  #     - facedb:/var/lib/postgresql/data:Z
 
    
   nginx:
     build: ./nginx
+    # image: nginx:latest
     container_name: nginx
     # restart: unless-stopped
     ports:
       - '80:80'
+      - '443:443'
     depends_on:
       - homepage
-      - store-web
-      - store-api
-      - face-web
-      - face-api
+    #   - store-web
+    #   - store-api
+    #   - face-web
+    #   - face-api
     networks: 
       - home-network
-      - store-network
-      - face-network
+    #   - store-network
+      # - face-network
+    volumes:
+      - ./etc-output/:/etc/nginx/ssl/:ro,Z #manually created letsencrypt ssl cert using certbot, then stored inside etc-output dir
+      # - ./nginx/conf.d/:/etc/nginx/conf.d/:ro,Z
+      # - ./certbot/www:/var/www/certbot/:ro,z
+      # - ./certbot/conf/:/etc/nginx/ssl/:ro
 
-volumes:
-  storedb:
-    driver: local
-  facedb:
-    driver: local
+
+# volumes:
+#   storedb:
+#     driver: local
+#   facedb:
+#     driver: local
 
 networks: 
-  face-network:
-    driver: bridge
   home-network:
     driver: bridge
-  store-network:
-    driver: bridge
+#   store-network:
+#     driver: bridge
+  # face-network:
+  #   driver: bridge
+

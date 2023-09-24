@@ -22,6 +22,8 @@ storeapp/store-web/build
 storeapp/.vscode
 faceapp/.vscode
 personalwebsite/.vscode
+etc-output/
+nginx/certs/
 .DS_Store
 .env
 .env.local
