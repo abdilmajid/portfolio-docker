@@ -1,10 +1,8 @@
 FROM nginx
 
-
-# COPY ./conf.d/nginx.conf /etc/nginx/conf.d/nginx.conf
 COPY ./conf.d/default.conf /etc/nginx/conf.d/default.conf
-# COPY ./conf.d/face.conf /etc/nginx/conf.d/face.conf
-# COPY ./conf.d/store.conf /etc/nginx/conf.d/store.conf
+COPY ./conf.d/face.conf /etc/nginx/conf.d/face.conf
+COPY ./conf.d/store.conf /etc/nginx/conf.d/store.conf
 COPY ./conf.d/homepage.conf /etc/nginx/conf.d/homepage.conf
 
 

@@ -11,7 +11,7 @@ RUN yarn install
 COPY --chown=app:app . .
 
 ENV PORT=4000
-ENV REACT_APP_API_CALL=http://store.abdil.ca/api
+ENV REACT_APP_API_CALL=https://store.abdil.ca/api
 ENV NODE_OPTIONS=--openssl-legacy-provider
 
 EXPOSE 4000

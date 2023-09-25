@@ -24,7 +24,7 @@ const db = knex({
     // database : process.env.RDS_DATABASE
   
     //Need to use ip of HOST machine, issue with using '127.0.0.1' or 'localhost' when running inside contatainer
-    host: '192.168.50.56',
+    host: '172.26.1.106',
     port: 5432,
     user: 'app',
     password: '',
